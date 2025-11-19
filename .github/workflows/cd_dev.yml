@@ -19,7 +19,6 @@
 
 
 
-
 name: Deploy to dev environment
 on:
   push:
@@ -35,7 +34,12 @@ jobs:
         run: |
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/ssh_key
           chmod 600 ~/ssh_key
+
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
           ssh-keyscan -H ${{ secrets.DEV_VM_IP }} >> ~/.ssh/known_hosts
+
+          
           ssh -i ~/ssh_key farazyt12@${{ secrets.DEV_VM_IP }} -t "
             cd ci-cd/ &&
             git pull origin main &&
@@ -46,3 +50,4 @@ jobs:
             pm2 restart http-server &&
             pm2 restart ws-sever
           "
+
