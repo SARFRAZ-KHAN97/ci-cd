@@ -41,7 +41,7 @@ jobs:
 
 
           ssh -i ~/ssh_key farazyt12@${{ secrets.DEV_VM_IP }} -t "
-            export PATH=/home/farazyt12/.nvm/versions/node/v22.20.0/bin/node&&
+            export PATH=/home/farazyt12/.nvm/versions/node/v22.20.0/bin:\$PATH&&
             cd ci-cd/ &&
             git pull origin main &&
             npm install -g pnpm &&
