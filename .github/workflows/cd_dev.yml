@@ -39,7 +39,6 @@ jobs:
           ssh -i ~/ssh_key farazyt12@${{ secrets.DEV_VM_IP }} -t "
             cd ci-cd/ &&
             git pull origin main &&
-            export PATH=/root/.nvm/versions/node/v22.13.1/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin &&
             npm install -g pnpm &&
             pnpm install &&
             pnpm run build &&
